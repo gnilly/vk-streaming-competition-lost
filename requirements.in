@@ -3,3 +3,6 @@ aiohttp_jinja2
 gunicorn
 markdown
 python-dotenv
+requests
+pandas
+numpy

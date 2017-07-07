@@ -1,6 +1,6 @@
 {
-  "name": "Heroku aiohttp web",
-  "description": "A barebones aiohttp app using gunicorn",
+  "name": "Emoji sentiment",
+  "description": "Emoji sentiment prototype",
   "repository": "https://github.com/sseg/heroku-aiohttp-web",
   "keywords": ["python", "aiohttp", "asyncio"],
   "buildpacks": [
@@ -9,7 +9,7 @@
   "env": {
     "ROOT_LOG_LEVEL": {
       "description": "Application log level. One of (`CRITICAL`, `ERROR`, `WARNING`, `INFO`, `DEBUG`)",
-      "value": "INFO"
+      "value": "WARNING"
     }
   }
 }

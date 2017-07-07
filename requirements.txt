@@ -4,14 +4,24 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-aiohttp-jinja2==0.8.0
-aiohttp==1.0.1
-async-timeout==1.0.0      # via aiohttp
-chardet==2.3.0            # via aiohttp
-click==6.6                # via python-dotenv
-gunicorn==19.6.0
-jinja2==2.8               # via aiohttp-jinja2
-markdown==2.6.6
-MarkupSafe==0.23          # via jinja2
-multidict==2.1.0          # via aiohttp
-python-dotenv==0.6.0
+aiohttp-jinja2==0.13.0
+aiohttp==2.2.3
+async-timeout==1.2.1      # via aiohttp
+certifi==2017.4.17        # via requests
+chardet==3.0.4            # via aiohttp, requests
+click==6.7                # via python-dotenv
+gunicorn==19.7.1
+idna==2.5                 # via requests
+jinja2==2.9.6             # via aiohttp-jinja2
+markdown==2.6.8
+markupsafe==1.0           # via jinja2
+multidict==3.1.0          # via aiohttp, yarl
+numpy==1.13.1
+pandas==0.20.2
+python-dateutil==2.6.0    # via pandas
+python-dotenv==0.6.4
+pytz==2017.2              # via pandas
+requests==2.18.1
+six==1.10.0               # via python-dateutil
+urllib3==1.21.1           # via requests
+yarl==0.11.0              # via aiohttp

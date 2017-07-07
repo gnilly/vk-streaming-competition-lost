@@ -1,38 +1,58 @@
-{% extends "base.jinja2" %}
-{% include "components/nav.jinja2" %}
-{% block content %}
-
-<div class="jumbotron text-center">
-  <div class="container">
-    <h4>Server Ticks</h4>
-    <div class="tick-view">
-      <span id="clock"> </span>
+<meta http-equiv="refresh" content="30">
+<title>{{ '%s %s' | format(query_tag, emoji_str) }}</title>
+<link rel="stylesheet" href="https://cdn.rawgit.com/mblode/marx/master/css/marx.min.css">
+<script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.3.0"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<body style="text-align:center">
+    <div style="float:right;margin-right:30px;font-size:24px;">
+        <form action="" method="get">
+            <select name="tag" onchange="this.form.submit()">
+            {% for tag in tags %}
+            <option value="{{ tag }}"{{ ' selected=selected' if tag == query_tag else ''}}">{{ tag }}</option>
+            {% endfor %}
+             </select>
+        </form>
     </div>
-  </div>
-</div>
+    <h1 style="border-bottom: 0px;">
 
-<div class="container">
-  <div class="row">
+        <div style="margin-bottom: 20px;clear: both;float:center;">
+            Отношение к событию
 
-    <div class="col-md-5">
-      <h3> What is this? </h3>
-      {{ content['what_is_this'] }}
+        </div>
+
+    <img src='https://cdnjs.cloudflare.com/ajax/libs/twemoji/2.3.0/72x72/1f629.png' style="opacity: {{1 if overall_sent<-0.75 else 0.2}}">
+    <img src='https://cdnjs.cloudflare.com/ajax/libs/twemoji/2.3.0/72x72/1f61f.png' style="opacity: {{1 if -0.75<=overall_sent<-0.25 else 0.2}}">
+    <img src='https://cdnjs.cloudflare.com/ajax/libs/twemoji/2.3.0/72x72/1f610.png' style="opacity: {{1 if -0.25<=overall_sent<0.25 else 0.2}}">
+    <img src='https://cdnjs.cloudflare.com/ajax/libs/twemoji/2.3.0/72x72/1f60a.png' style="opacity: {{1 if 0.25<=overall_sent<0.75 else 0.2}}">
+    <img src='https://cdnjs.cloudflare.com/ajax/libs/twemoji/2.3.0/72x72/1f604.png' style="opacity: {{1 if overall_sent>=0.75 else 0.2}}">
+
+    <span style='font-size:14px'>({{ "{:,.2f}".format(overall_sent) }})</span>
+
+    {% if top|length > 0 %}
+    <div style="margin-top:20px">
+        <div style="margin-bottom: 20px;">Топ эмоций</div>
+    {% for emoji in top %}
+        <span style='font-size:72px'><script>document.write(twemoji.parse('{{ emoji[0] }}'))</script></span><div style='font-size:14px;position:relative;display:inline;left:-56px;top:15px;text-shadow: 1px 1px 1px white;'>({{emoji[1]}} +{{emoji[2]}})</div>
+    {% endfor %}
     </div>
+    {% endif %}
 
-    <div class="col-md-7">
-      <h3> Where do I go from here? </h3>
-      <div class="alert alert-info text-center" role="alert">
-          {{ content['alert_guide'] }}
-      </div>
-      {{ content['where_next'] }}
+     {% if chart_data.x|length > 2 %}
+     <div style="margin-top:40px">
+        <div style="margin-bottom: 20px;">Изменение отношения</div>
+        <div id="plot" style="width:600px;height:300px;margin-top:30px;margin-right: auto; margin-left: auto;"></div>
+
+        <script>
+
+            Plotly.plot( document.getElementById('plot'), [{
+                  x: {{ chart_data.x }},
+                y: {{ chart_data.y }} }], {
+                    xaxis: {title: 'Time'},
+                    yaxis: {title: 'Sentiment score'},
+                    margin: { t: 0 }
+                } );
+        </script>
     </div>
-
-    <div class="col-md-12">
-      <h3> Helpful Links </h3>
-      {{ content['helpful_links'] }}
-    </div>
-
-  </div> <!-- row -->
-</div>
-
-{% endblock %}
+    {% endif %}
+</h1>
+</body>
