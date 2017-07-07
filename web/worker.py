@@ -99,7 +99,7 @@ def process_message(msg):
     overall_sent.to_sql('overall_sent',con,if_exists='replace')
     top_emoji.to_sql('top_emoji',con,if_exists='replace')
 
-    print("< {}".format(msg))
+    print("< {} {}".format(''.join(tags), msg))
 
 
 def recalc_stats():
