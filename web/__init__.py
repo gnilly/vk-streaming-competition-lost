@@ -13,6 +13,8 @@ import datetime as dt
 
 import sqlalchemy
 
+from web.utils.settings import get_config
+
 here_folder = os.path.dirname(os.path.abspath(__file__))
 log = logging.getLogger(__name__)
 
