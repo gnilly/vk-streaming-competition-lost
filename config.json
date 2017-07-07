@@ -16,7 +16,11 @@
     "topic":"Навальный"
   },
   {
-    "keywords":["двач","2ch"],
+    "keywords":"двач",
     "topic":"Двач"
+  },
+  {
+    "keywords":"stereoleto",
+    "topic":"СТЕРЕОЛЕТО"
   }
 ]
