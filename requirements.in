@@ -6,3 +6,6 @@ python-dotenv
 requests
 pandas
 numpy
+freeze
+psycopg2
+sqlalchemy
