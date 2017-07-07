@@ -172,6 +172,8 @@ async def main_page_handler(request):
                   'tags': rule_names,
                   'query_tag': tag}
 
+    log.debug(emoji_data)
+
     response = aiohttp_jinja2.render_template('index.jinja2',
                                               request,
                                               emoji_data)
