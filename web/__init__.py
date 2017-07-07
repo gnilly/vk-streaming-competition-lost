@@ -226,29 +226,12 @@ def build_app(settings_path, loop=None):
 
     application.settings = settings
 
-    # static assets
-    if settings['assets']['use_proxy']:
-        application.assets = AssetManager(application, prefix=settings['assets']['base_path'])
-    else:
-        static_dir = os.path.join(os.path.dirname(here_folder), 'public')
-        application.assets = AssetManager(
-            application,
-            prefix=settings['assets']['base_path'],
-            directory=static_dir
-        )
-    manifest_file = os.path.join(os.path.dirname(here_folder), settings['assets']['manifest'])
-    application.assets.load_manifest(manifest_file)
-
     # templates
 
     template_dir = os.path.join(os.path.dirname(__file__), 'templates')
     env = aiohttp_jinja2.setup(
         application, loader=jinja2.FileSystemLoader(template_dir)
     )
-    env.globals['asset'] = application.assets.get_path
-
-    # connect routes
-    # configure_handlers(application, routes)
 
     # shutdown connection clean-up
     async def on_shutdown_close_conns(app):
