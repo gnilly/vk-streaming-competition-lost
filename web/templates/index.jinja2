@@ -8,7 +8,7 @@
         <form action="" method="get">
             <select name="tag" onchange="this.form.submit()">
             {% for tag in tags %}
-            <option value="{{ tag }}"{{ ' selected=selected' if tag == query_tag else ''}}">{{ tag }}</option>
+            <option value="{{ tag }}"{{' selected=selected' if tag == query_tag else ''}}">{{ tag }}</option>
             {% endfor %}
              </select>
         </form>
@@ -47,8 +47,8 @@
             Plotly.plot( document.getElementById('plot'), [{
                   x: {{ chart_data.x }},
                 y: {{ chart_data.y }} }], {
-                    xaxis: {title: 'Time'},
-                    yaxis: {title: 'Sentiment score'},
+                    xaxis: {title: 'Время'},
+                    yaxis: {title: 'Оценка отношения'},
                     margin: { t: 0 }
                 } );
         </script>

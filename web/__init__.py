@@ -45,12 +45,20 @@ def round_time(t):
 
 async def main_page_handler(request):
     overall_sent, top_emoji = pd.read_sql('overall_sent', con), pd.read_sql('top_emoji', con)
+    chart_data = pd.read_sql_table('chart_data', con)
+
+    for i in range(10):
+        overall_sent, top_emoji = pd.read_sql('overall_sent', con), pd.read_sql('top_emoji', con)
+        chart_data = pd.read_sql_table('chart_data', con)
+        if (len(overall_sent)==0)|(len(top_emoji)==0)|(len(chart_data)==0):
+           asyncio.sleep(1000)
+        else:
+            break
 
     overall_sent.set_index('tag', inplace=True)
     top_emoji.drop('index', 1, inplace=True)
-
-    chart_data = pd.read_sql_table('chart_data', con)
     chart_data.set_index(['tag', 'time-slot'], inplace=True)
+
 
     tag = request.query['tag'] if 'tag' in request.query else rule_names[0]
 
