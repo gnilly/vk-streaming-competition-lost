@@ -45,10 +45,10 @@ def round_time(t):
 
 def wait_and_read_table(table_name, connection):
     for i in range(10):
-        if (connection.dialect.has_table(connection, table_name)):
-            return pd.read_sql_table(table_name, connection)
-        asyncio.sleep(1000)
-
+        res = pd.read_sql_table(table_name, connection)
+        if len(res) > 0:
+            return res
+        asyncio.sleep(100)
 
 async def main_page_handler(request):
     overall_sent = wait_and_read_table('overall_sent', con)
