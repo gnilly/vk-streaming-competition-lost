@@ -43,17 +43,17 @@ rule_names = [c['topic'] for c in config]
 def round_time(t):
     return t - dt.timedelta(seconds=t.second, microseconds=t.microsecond)
 
-async def main_page_handler(request):
-    overall_sent, top_emoji = pd.read_sql('overall_sent', con), pd.read_sql('top_emoji', con)
-    chart_data = pd.read_sql_table('chart_data', con)
-
-    for i in range(10):
-        overall_sent, top_emoji = pd.read_sql('overall_sent', con), pd.read_sql('top_emoji', con)
-        chart_data = pd.read_sql_table('chart_data', con)
-        if (len(overall_sent)==0)|(len(top_emoji)==0)|(len(chart_data)==0):
-           asyncio.sleep(1000)
+def wait_and_read_table(table_name, connection):
+    for i in range(10)
+        if (~connection.dialect.has_table(connection, table_name)):
+            asyncio.sleep(1000)
         else:
-            break
+            return pd.read_sql(table_name, connection)
+
+async def main_page_handler(request):
+    overall_sent = wait_and_read_table('overall_sent', con)
+    top_emoji = wait_and_read_table('top_emoji', con)
+    chart_data = wait_and_read_table('chart_data', con)
 
     overall_sent.set_index('tag', inplace=True)
     top_emoji.drop('index', 1, inplace=True)
