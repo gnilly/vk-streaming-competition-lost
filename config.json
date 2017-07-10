@@ -4,10 +4,6 @@
     "topic": "Лето"
   },
   {
-    "keywords": "выпуск2017",
-    "topic": "Выпуск 2017"
-  },
-  {
     "keywords":"спорт",
     "topic":"Спорт"
   },
@@ -16,11 +12,7 @@
     "topic":"Навальный"
   },
   {
-    "keywords":"двач",
-    "topic":"Двач"
-  },
-  {
-    "keywords":"stereoleto",
-    "topic":"СТЕРЕОЛЕТО"
+    "keywords":"vkfest",
+    "topic":"vkfest"
   }
 ]
