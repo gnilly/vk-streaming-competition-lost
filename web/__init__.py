@@ -46,7 +46,7 @@ def round_time(t):
 def wait_and_read_table(table_name, connection):
     for i in range(10):
         res = pd.read_sql_table(table_name, connection)
-        if len(res) > 0:
+        if (~(res is None))|(len(res) > 0):
             return res
         asyncio.sleep(100)
 
@@ -54,8 +54,6 @@ async def main_page_handler(request):
     overall_sent = wait_and_read_table('overall_sent', con)
     top_emoji = wait_and_read_table('top_emoji', con)
     chart_data = wait_and_read_table('chart_data', con)
-
-    print(overall_sent)
 
     overall_sent.set_index('tag', inplace=True)
     top_emoji.drop('index', 1, inplace=True)
