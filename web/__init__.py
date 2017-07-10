@@ -43,12 +43,17 @@ rule_names = [c['topic'] for c in config]
 def round_time(t):
     return t - dt.timedelta(seconds=t.second, microseconds=t.microsecond)
 
+
 def wait_and_read_table(table_name, connection):
     for i in range(10):
-        res = pd.read_sql_table(table_name, connection)
+        try:
+            res = pd.read_sql_table(table_name, connection)
+        except:
+            res = None
         if (~(res is None))|(len(res) > 0):
             return res
         asyncio.sleep(100)
+        
 
 async def main_page_handler(request):
     overall_sent = wait_and_read_table('overall_sent', con)
