@@ -44,7 +44,7 @@ def round_time(t):
     return t - dt.timedelta(seconds=t.second, microseconds=t.microsecond)
 
 def wait_and_read_table(table_name, connection):
-    for i in range(10)
+    for i in range(10):
         if (~connection.dialect.has_table(connection, table_name)):
             asyncio.sleep(1000)
         else:
