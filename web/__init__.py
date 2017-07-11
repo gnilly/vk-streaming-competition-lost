@@ -50,7 +50,7 @@ def wait_and_read_table(table_name, connection):
             res = pd.read_sql_table(table_name, connection)
         except:
             res = None
-        if (~(res is None)):
+        if (res is not None):
             return res
         asyncio.sleep(100)
 
