@@ -12,11 +12,15 @@
     "topic":"Навальный"
   },
   {
-    "keywords":"vkfest",
+    "keywords":"вкфест",
     "topic":"vkfest"
   },
   {
     "keywords":"почта",
     "topic":"Почта России"
+  },
+  {
+    "keywords":"дружко",
+    "topic":"Дружко"
   }
 ]
