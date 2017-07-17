@@ -132,6 +132,9 @@ def recalc_stats():
 
     for tag in sent_map['tag'].unique():
         chart_data.ix[(tag, curr_timeslot), 'sent'] = overall_sent.ix[tag]
+
+    chart_data.drop(chart_data.index[chart_data.reset_index()['time-slot'] < (curr_timeslot - dt.timedelta(hours=24))],
+                    inplace=True)
     chart_data.to_sql('chart_data', con, if_exists='replace',dtype={'time-slot': TIMESTAMP(timezone=False)})
 
     return overall_sent, top_emoji
